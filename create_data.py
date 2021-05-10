@@ -1,5 +1,6 @@
 import json
 from typing import Any, Callable, Dict, Tuple
+
 import torch
 
 
@@ -47,11 +48,11 @@ def create_model_test_data(
 
     # Create input data
     num_elements = int(torch.Tensor(input_shape).prod())
-    in_data = torch.arange(num_elements).reshape(input_shape)
+    in_data = torch.arange(num_elements).reshape(input_shape).float()
 
     # Forward pass data
     out_data = model(in_data)
 
     # Save in data, out data and model
-    to_save = {"in_data": in_data, "out_data": out_data, "model": model}
+    to_save = {"in_data": in_data, "out_data": out_data, "model": model.state_dict()}
     torch.save(to_save, out_path_no_ext)
