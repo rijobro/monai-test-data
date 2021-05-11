@@ -45,6 +45,7 @@ def create_model_test_data(
 
     # Create model
     model = model_class(**model_params)
+    model.eval()
 
     # Create input data
     num_elements = int(torch.Tensor(input_shape).prod())
@@ -55,4 +56,4 @@ def create_model_test_data(
 
     # Save in data, out data and model
     to_save = {"in_data": in_data, "out_data": out_data, "model": model.state_dict()}
-    torch.save(to_save, out_path_no_ext)
+    torch.save(to_save, out_path_no_ext + ".pt")
